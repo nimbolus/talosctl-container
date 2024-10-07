@@ -8,6 +8,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  TALOS_VERSION: "v1.8.0"
 
 jobs:
   build-and-push-image:
@@ -45,9 +46,9 @@ jobs:
             type=raw,value=latest
             type=sha
           labels: |
-            org.opencontainers.image.description=Busybox image with talosctl (latest)
+            org.opencontainers.image.description=Busybox image with talosctl (${{ env.TALOS_VERSION }})
           annotations: |
-            org.opencontainers.image.description=Busybox image with talosctl (latest)
+            org.opencontainers.image.description=Busybox image with talosctl (${{ env.TALOS_VERSION }})
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
@@ -57,6 +58,8 @@ jobs:
         with:
           context: .
           platforms: linux/amd64,linux/arm64
+          build-args: |
+            TALOS_VERSION=${{ env.TALOS_VERSION }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
