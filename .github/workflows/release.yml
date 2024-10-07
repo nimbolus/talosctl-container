@@ -44,6 +44,12 @@ jobs:
             type=ref,event=tag
             type=raw,value=latest
             type=sha
+          labels: |
+            org.opencontainers.image.description=Busybox image with talosctl (latest)
+          annotations: |
+            org.opencontainers.image.description=Busybox image with talosctl (latest)
+        env:
+          DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
       - name: Build and push Docker image
         id: push
@@ -54,6 +60,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
