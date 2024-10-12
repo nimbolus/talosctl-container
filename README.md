@@ -8,5 +8,5 @@ This image is useful for running shell scripts using talosctl (e.g. backup scrip
 ```sh
 podman run \
     -v $PWD/talosconfig.yaml:/var/run/secrets/talos.dev/config \
-    ghcr.io/nimbolus/container-talosctl
+    ghcr.io/nimbolus/talosctl-container
 ```
