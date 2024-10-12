@@ -1,4 +1,4 @@
-name: Build and publish container image
+name: Build container image
 
 on:
   push:
@@ -10,7 +10,7 @@ env:
   TALOS_VERSION: "v1.8.0"
 
 jobs:
-  build-and-push-image:
+  build-image:
     runs-on: ubuntu-latest
     permissions:
       contents: read
